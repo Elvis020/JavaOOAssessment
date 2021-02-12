@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Stocks implements MontrealTradedProducts {
+public class Stocks implements MontrealTradedProducts  {
 
     List<Product> listOfStocksProducts = new ArrayList<>();
     int totalQuantitiesOfStocks;
@@ -33,10 +33,11 @@ public class Stocks implements MontrealTradedProducts {
     public void trade(Product product, int quantity) {
         ////        Getting the product ID
         int productIDForChecking = product.productID;
+        double initialQuantity = 0.0;
         List<Product> acceptedProduct =
                 listOfStocksProducts.stream()
-                        .filter(x -> x.productID == productIDForChecking)
-                        .forEach((x,y) -> y+quantity);
+                        .filter(x -> x.productID != productIDForChecking)
+                        .collect(Collectors.toList());
         totalQuantitiesOfStocks += quantity;
 
     }
